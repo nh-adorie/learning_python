@@ -1,3 +1,3 @@
 FROM gitpod/workspace-full
 
-RUN pip install pandas numpy matplotlib
+RUN pip install pandas numpy matplotlib kagglehub

@@ -1,1 +1,3 @@
-RUN pip install pandas numpy matplotlib 
+FROM gitpod/workspace-full
+
+RUN pip install pandas numpy matplotlib

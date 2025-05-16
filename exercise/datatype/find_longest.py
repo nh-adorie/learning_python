@@ -2,11 +2,20 @@
 # and return the longest word 
 # and the length of the longest one.
 
-def longest_word(word_list):
-    word_len = []
-    for i in word_list:
-        word_len.append(len(i)) # Thêm chiều dài của từ i vào trong list word_len
-        word_len.sort() # Sắp xếp list word_len theo thứ tự từ bé đến lớn
-    return word_len[-1] # Trả giá trị là độ dài lớn nhất
+def longest_word(sentence):
+    words = sentence.split()
+    length = 0
+    longest = ""
+    
+    for word in words:
+        if len(word) > length:
+            length = len(word)
+            longest = word
+    return length, longest
+
+sentence = input('Please input your sentence, i will find the longest word: ')
+length, longest = longest_word(sentence)
+print('The longest word is ',longest,' with',length,'character(s)')
+
 
 

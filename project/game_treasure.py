@@ -11,10 +11,6 @@ if ques1.lower() == "left":
     Do you want to swimm across the river or waiting for a boat? 
     swim or wait """)
     if ques2.lower() == "wait":
-        ques3 = input(""" 
-        There are three boats come: pink, blue, white (●'◡'●)
-        Which do you want to ride?
-        """)
         print('''
          ~;
                   ,/|\,
@@ -28,6 +24,11 @@ if ques1.lower() == "left":
    ~~-~^~^~`~^~`~^^~^~-^~^~^~-~^~^
      ~-^~^-`~^~-^~^`^~^-^~^`^~^-~^
      ''')
+        ques3 = input(""" 
+        There are three boats come: pink, blue, white (●'◡'●)
+        Which do you want to ride?
+        """)
+        
         if ques3.lower() == "pink":
             print("""
             The boat slowly sails accross the river ~
@@ -93,9 +94,10 @@ else:
         ''')
     print("""
     You meet a bear.
-    He try to make friend with you but you so scared that you run a way
-    And fall into a brick ...
-      :(""")
+    He try to make friend with you 
+    But you are so scared that you run a way
+    And fall into mountain cliff ...
+    """)
 
     
 

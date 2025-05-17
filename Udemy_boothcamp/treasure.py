@@ -1,15 +1,13 @@
-
-
-
 print("""Welcome to Treasure Island~
 Your mission is to find the treasure""")
 
 ques1 = input("""
+You are at the middle of the forest~
 Do you want to turn left or turn right? 
 left or right """)
 if ques1.lower() == "left":
     ques2 = input("""
-    You see a river. 
+    You see a river! 
     Do you want to swimm across the river or waiting for a boat? 
     swim or wait """)
     if ques2.lower() == "wait":
@@ -64,8 +62,40 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
             You drownwd ... Game over!""")
     else:
         print("The croccodile ATE you ψ(｀∇´)ψ Game over!")
+        print('''
+                            .-._   _ _ _ _ _ _ _ _
+         .-''-.__.-'00  '-' ' ' ' ' ' ' ' '-.
+         '.___ '    .   .--_'-' '-' '-' _'-' '._
+          V: V 'vv-'   '_   '.       .'  _..' '.'.
+            '=.____.=_.--'   :_.__.__:_   '.   : :
+                    (((____.-'        '-.  /   : :
+          snd                         (((-'\ .' /
+                                    _____..'  .'
+                                   '-._____.-'
+                                   ''')
 else:
-    print("You fell into a hole, game over :(")
+    print('''
+          ( )___( )
+          /__oo   \
+         ( \/     )
+         | `=/    |
+        /         \
+       /  /    \   \
+      /  (      \   \ 
+     ( ,_/_      \   \
+      \_ '=       \   )
+        ""'       /  /
+        ;        /  /'?
+        :       (((( /
+         `._   \  _ (
+          __|   |  /_    
+        ("__,.."'_._.)   
+        ''')
+    print("""
+    You meet a bear.
+    He try to make friend with you but you so scared that you run a way
+    And fall into a brick ...
+      :(""")
 
     
 

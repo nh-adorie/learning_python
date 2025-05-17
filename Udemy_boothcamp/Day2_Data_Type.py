@@ -31,9 +31,9 @@ float()
 str()
 bool()
 
-# name = input('Input your name: ')
-# count = len(name)
-# print('Length of your name: ',count)
+name = input('Input your name: ')
+count = len(name)
+print('Length of your name: ',count)
 
 ## MATHEMATICAL OPERATORS
 print(3 * 2)

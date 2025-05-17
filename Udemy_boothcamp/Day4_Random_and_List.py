@@ -22,9 +22,9 @@ else:
 ## LIST: có thứ tự, có thể sửa, có thể thêm
 
 fruits = ["mango","apply","banana"]
-# fruits[1] = "apple"
-# fruits.append("strawberry")
-# print(fruits)
+fruits[1] = "apple"
+fruits.append("strawberry")
+print(fruits)
 
 ## WHO PAY THE BILL?
 friends = ["Alice","Bob","Charlie","David","Emanuel"]

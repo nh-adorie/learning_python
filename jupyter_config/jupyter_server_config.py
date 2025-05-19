@@ -1,9 +1,11 @@
 # Configuration file for jupyter-server.
 
 c = get_config()  #noqa
+
 c.ServerApp.allow_origin_regex = '.*gitpod.io$'
 c.ServerApp.allow_remote_access = True
-
+c.ServerApp.allow_root = True
+c.ServerApp.allow_hosts = ['*']
 
 #------------------------------------------------------------------------------
 # Application(SingletonConfigurable) configuration

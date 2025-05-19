@@ -1,4 +1,5 @@
 # Configuration file for jupyter-server.
+# jupyter lab --ServerApp.allow_origin_regex='.*gitpod.io$' --ServerApp.allow_remote_access=True --ServerApp.allow_hosts='*'
 
 c = get_config()  #noqa
 

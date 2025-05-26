@@ -1,0 +1,40 @@
+// .devcontainer/devcontainer.json
+{
+  "name": "My Python Data Science Codespace",
+  // Sử dụng image Dev Container cho Python
+  // "python:3.10" là một lựa chọn tốt và phổ biến.
+  // Bạn có thể thay đổi phiên bản Python nếu cần, ví dụ "python:3.9" hoặc "python:3.11"
+  "image": "mcr.microsoft.com/devcontainers/python:3.10",
+
+  // Thêm các tính năng (features) nếu cần, ví dụ CLI tools (Git, GitHub CLI, Docker)
+  // Các features này thường đã có sẵn trong image Python, nhưng có thể thêm nếu muốn chắc chắn.
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {} // Nếu bạn cần chạy Docker bên trong Codespace
+  },
+
+  // Tùy chỉnh VS Code và cài đặt extensions
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",          // Tiện ích mở rộng Python chính thức
+        "ms-toolsai.jupyter",        // Hỗ trợ Jupyter Notebooks
+        "ms-toolsai.jupyter-keymap", // (Tùy chọn) Keymap Jupyter
+        "ms-toolsai.jupyter-renderers" // (Tùy chọn) Renderers cho Jupyter
+      ]
+    }
+  },
+
+  // Các lệnh sẽ chạy sau khi container được tạo
+  // Điều này tương đương với các lệnh RUN pip install của bạn
+  "postCreateCommand": {
+    "install_python_packages": "pip install --no-cache-dir --upgrade jupyter ipywidgets numpy pandas matplotlib seaborn scipy scikit-learn plotly yellowbrick kagglehub"
+  },
+
+  // Các cổng (ports) sẽ được tự động chuyển tiếp
+  // Cổng 8888 là cổng mặc định của Jupyter Lab
+  "forwardPorts": [8888],
+
+  // User mặc định bên trong container
+  "remoteUser": "vscode"
+}

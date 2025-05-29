@@ -21,18 +21,23 @@ operations = {
 
 # Create function to use dictionary to perform the calculation
 def calculation(num1, num2, opt):
-    result = operations[opt](num1,num2)
-    return result
+    return operations[opt](num1,num2)
 
-# Ask input from user
-while True:
+# Header
+print("Welcome to the calculator! ")
+
+button_new = True
+while button_new == True:
+
     # Ask for num1
-    try:
-        num1 = float(input("What is the first number? "))
-        break
-    except Exception as e:
-        print(e)
-    
+    while True:
+        try:
+            num1 = float(input("\nWhat is the first number? "))
+            break
+        except Exception as e:
+            print(e)
+        continue
+
     # Ask for operator
     print("""
     + for plus
@@ -40,27 +45,52 @@ while True:
     * for multiply
     / for divide      
     """)
-    while True:
-        opt = input("What is the operator? ")
-        if opt in ["+","-","*","/"]:
+
+    button_continue = True
+    while button_continue == True: 
+        while True:
+            opt = input("\nWhat is the operator? ")
+            if opt in ["+","-","*","/"]:
+                break
+            else:
+                print("Please input valid operator ")
+            continue
+
+        # Ask for num2:
+        while True:
+            try: 
+                num2 = float(input("\nWhat is the next number? "))
+                break
+            except Exception as e:
+                print(e)
+            continue
+
+        # The calculation
+        result = calculation(num1, num2, opt)
+        print(f"\n{num1} {opt} {num2} = {result}")
+
+        # Check if user want to continue
+        is_continue = input(f"\nPress 'y' to continue calculate with {result} \nPress 'n' to start a new calculation \nPress 'x' to end the program \n")
+        if is_continue == "x":
+            button_new = False
+            button_continue = False
+            print("\nGoodbye! ")
             break
-        else:
-            print("Please input valid operator ")
 
-# Ask for num2:
-while True:
-    try: 
-        num2 = float(input("What is the next number? "))
-        break
-    except Exception as e:
-        print(e)
+        if is_continue == "n":
+            button_new = True
+            button_continue = False
+            continue
 
-calculation(num1, num2, opt)
-print(num1 opt num2 "=" result)
+        if is_continue == "y":
+            num1 = result
 
-is_continue = input(f"""Press 'y' to continue calculate with {result}
-Press 'n' to start a new calculation
-Press 'x' to end the program """)
-if is_continue == "y":
+
+
+
+
+
+    
+
 
 

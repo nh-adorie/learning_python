@@ -55,15 +55,12 @@ while True:
     except Exception as e:
         print(e)
 
+calculation(num1, num2, opt)
+print(num1 opt num2 "=" result)
 
-
-
-
-
-while True:
-    is_continue = input(f"""Press 'y' to continue calculate with {result}
-    Press 'n' to start a new calculation
-    Press 'x' to end the program """)
-    if is_continue == "y":
+is_continue = input(f"""Press 'y' to continue calculate with {result}
+Press 'n' to start a new calculation
+Press 'x' to end the program """)
+if is_continue == "y":
 
 

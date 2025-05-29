@@ -9,6 +9,9 @@ def multiply(n1,n2):
     return n1 * n2
 
 def divide(n1,n2):
+    if n2 == 0:
+        print("Can not divide by 0 ")
+        return None
     return n1 / n2
 
 # Create operations dictionary
@@ -67,25 +70,27 @@ while button_new == True:
 
         # The calculation
         result = calculation(num1, num2, opt)
-        print(f"\n{num1} {opt} {num2} = {result}")
+        if result is not None:        
+            print(f"\n{num1} {opt} {num2} = {result}")       
 
-        # Check if user want to continue
-        is_continue = input(f"\nPress 'y' to continue calculate with {result} \nPress 'n' to start a new calculation \nPress 'x' to end the program \n")
-        if is_continue == "x":
-            button_new = False
-            button_continue = False
-            print("\nGoodbye! ")
-            break
+            # Check if user want to continue
+            is_continue = input(f"\nPress 'y' to continue calculate with {result} \nPress 'n' to start a new calculation \nPress 'x' to end the program \n")
+            if is_continue == "x":
+                button_new = False
+                button_continue = False
+                print("\nGoodbye! ")
+                break
 
-        if is_continue == "n":
+            if is_continue == "n":
+                button_new = True
+                button_continue = False
+                continue
+
+            if is_continue == "y":
+                num1 = result
+
+        else: 
             button_new = True
-            button_continue = False
-            continue
-
-        if is_continue == "y":
-            num1 = result
-
-
 
 
 

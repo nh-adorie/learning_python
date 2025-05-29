@@ -27,6 +27,8 @@ def calculation(num1, num2, opt):
     return operations[opt](num1,num2)
 
 # Header
+import art
+print(art.calculator)
 print("Welcome to the calculator! ")
 
 button_new = True

@@ -45,7 +45,7 @@ def a_function(a_parameter):
     return a_parameter
  
 a_function(10)
-print(a_variable)
+# print(a_variable)
 
 i = 50
 def foo():

@@ -59,11 +59,11 @@ def result(user, computer,money):
     print(f"\nFinal score!")
     print(f"Your cards: {user_card} → Total: {user}")
     print_cards_inline(user_card)
-    print(f"\nComputer's cards: {computer_card} → Total: {computer}")
+    print(f"\nMy cards: {computer_card} → Total: {computer}")
     print_cards_inline(computer_card)
 
     if computer > 21:
-        print("Computer's cards added up more than 21. \nYou win \n☆*: .｡. o(≧▽≦)o .｡.:*☆")
+        print("My cards added up more than 21. \nYou win \n☆*: .｡. o(≧▽≦)o .｡.:*☆")
         money += 10
     elif user > 21:
         print("Your cards added up more than 21. \nYou lose \nψ(｀∇´)ψ")
@@ -107,11 +107,11 @@ while is_continue == True:
     # Reveal the card
     print("\nFirst card!")
     print(f"You received: {user_card[0]} \n{art.poker_card[str(user_card[0])]}")
-    print(f"Computer received: {computer_card[0]} \n{art.poker_card[str(computer_card[0])]}")
+    print(f"I received: {computer_card[0]} \n{art.poker_card[str(computer_card[0])]}")
     input("Press Enter to reveal next card...")
 
     print("\nSecond card!")
-    print(f"You received: {user_card[1]} \n{art.poker_card[str(user_card[1])]} \nComputer received: secret\n")
+    print(f"You received: {user_card[1]} \n{art.poker_card[str(user_card[1])]} \nI received: secret\n")
     input("Press Enter to reveal next card...")
 
     if user_scores[1] > 17:
@@ -128,13 +128,13 @@ while is_continue == True:
     elif user_scores[1] <= 17:
         
         print("\nFinal card!")
-        print(f"You received: {user_card[2]} \n{art.poker_card[str(user_card[2])]} \nComputer received: secret\n")
+        print(f"You received: {user_card[2]} \n{art.poker_card[str(user_card[2])]} \nI received: secret\n")
         money = result(user_scores[2],computer_scores[2],money)
         
     ask = input("\nDo you want to play again? y to play or press any key to end ").lower()
         
     if ask != "y":
-        print("Goodbye! ")
+        print("Goodbye ~ ")
         break
     else:
         is_continue = True

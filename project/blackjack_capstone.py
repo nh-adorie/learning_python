@@ -73,12 +73,13 @@ computer_card, computer_scores = play("computer")
 
 # Reveal the card
 print("First card!")
-print(f"You received: {user_card[0]} \nComputer received: {computer_card[0]}\n")
+print(f"You received: {user_card[0]} \n{art.poker_card[str(user_card[0])]}")
+print(f"Computer received: {computer_card[0]} \n{art.poker_card[str(computer_card[0])]}")
 
 print("Second card!")
-print(f"You received: {user_card[1]} \nComputer received: secret\n")
+print(f"You received: {user_card[1]} \n{art.poker_card[str(user_card[1])]} \nComputer received: secret\n")
 
-if user_scores[1] < 17:
+if user_scores[1] > 17:
     while True:
         pick = input("Do you want to pick up another card, press y to pick, or press n to end \n")
         if pick not in ["y","n"]:
@@ -89,11 +90,11 @@ if user_scores[1] < 17:
         if pick == "y":
             result(user_scores[2],computer_scores[2])
             break
-
-
-
-
-    
+elif user_scores[1] <= 17:
+    print("Final card!")
+    print(f"You received: {user_card[2]} \n{art.poker_card[str(user_card[2])]} \nComputer received: secret\n")
+    result(user_scores[2],computer_scores[2])
+   
     
 
 

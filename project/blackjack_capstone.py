@@ -55,7 +55,7 @@ def print_cards_inline(card_values):
         print("   ".join(card[i] for card in card_lines))
 
 # Create function to reveal result
-def result(user, computer):
+def result(user, computer,money):
     print(f"\nFinal score!")
     print(f"Your cards: {user_card} → Total: {user}")
     print_cards_inline(user_card)
@@ -64,18 +64,36 @@ def result(user, computer):
 
     if computer > 21:
         print("Computer's cards added up more than 21. \nYou win \n☆*: .｡. o(≧▽≦)o .｡.:*☆")
+        money += 10
     elif user > 21:
         print("Your cards added up more than 21. \nYou lose \nψ(｀∇´)ψ")
+        money -= 10
     elif computer > user:
         print("You lose ψ(｀∇´)ψ ")
+        money -= 10
     elif computer < user:
         print("You win \n☆*: .｡. o(≧▽≦)o .｡.:*☆")
+        money += 10
     elif computer == user:
         print("Draw! \n(❁´◡`❁)")
+    print("Your money: $",money)    
+    return money
         
 # Header
 print(art.blackjack)
 print("Welcome to Blackjack Game! ")
+print(
+    "\nGame Rules:\n"
+    "- You and the computer each get 3 cards.\n"
+    "- Whoever has the higher total score wins.\n"
+    "- If your total score exceeds 21, you lose immediately.\n"
+    "- If your first 2 cards total less than 17, you must draw a third card.\n"
+    "- If your first 2 cards total 17 or more, you can choose whether to draw the third card.\n"
+    "Good luck and have fun!"
+)
+
+input("\nPress Enter to play the game! ")
+money = 0
 
 # Play the game!
 
@@ -101,37 +119,23 @@ while is_continue == True:
             pick = input("Do you want to pick up another card, press y to pick, or press n to end \n").lower()
             if pick not in ["y","n"]:
                 print("Please choose y or n only \n ")
-            if pick == "n":
-                result(user_scores[1],computer_scores[1])
+            if pick == "n":                
+                money = result(user_scores[1],computer_scores[1],money)
                 break
-            if pick == "y":
-                result(user_scores[2],computer_scores[2])
+            if pick == "y":                
+                money = result(user_scores[2],computer_scores[2],money)
                 break
     elif user_scores[1] <= 17:
+        
         print("\nFinal card!")
         print(f"You received: {user_card[2]} \n{art.poker_card[str(user_card[2])]} \nComputer received: secret\n")
-        result(user_scores[2],computer_scores[2])
-    
+        money = result(user_scores[2],computer_scores[2],money)
+        
     ask = input("\nDo you want to play again? y to play or press any key to end ").lower()
+        
     if ask != "y":
         print("Goodbye! ")
         break
     else:
         is_continue = True
-        
-
-
-   
-    
-
-
-
-            
-
-
-
-
-
-
-    
-    
+ 

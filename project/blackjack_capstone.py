@@ -87,12 +87,12 @@ while is_continue == True:
     computer_card, computer_scores = play("computer")
 
     # Reveal the card
-    print("First card!")
+    print("\nFirst card!")
     print(f"You received: {user_card[0]} \n{art.poker_card[str(user_card[0])]}")
     print(f"Computer received: {computer_card[0]} \n{art.poker_card[str(computer_card[0])]}")
     input("Press Enter to reveal next card...")
 
-    print("Second card!")
+    print("\nSecond card!")
     print(f"You received: {user_card[1]} \n{art.poker_card[str(user_card[1])]} \nComputer received: secret\n")
     input("Press Enter to reveal next card...")
 
@@ -108,7 +108,7 @@ while is_continue == True:
                 result(user_scores[2],computer_scores[2])
                 break
     elif user_scores[1] <= 17:
-        print("Final card!")
+        print("\nFinal card!")
         print(f"You received: {user_card[2]} \n{art.poker_card[str(user_card[2])]} \nComputer received: secret\n")
         result(user_scores[2],computer_scores[2])
     

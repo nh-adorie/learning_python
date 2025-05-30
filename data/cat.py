@@ -26,4 +26,3 @@ cat_breed.head()
 
 # Nhập dòng lệnh này trong new terminal để mở jupyterlab
 # jupyter lab --ServerApp.allow_origin_regex='.*gitpod.io$' --ServerApp.allow_remote_access=True --ServerApp.allow_hosts='*'
-

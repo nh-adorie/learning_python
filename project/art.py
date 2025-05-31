@@ -200,3 +200,56 @@ vs = """
  |v|s|
  +-+-+        
 """
+
+animal_icons = [
+    "🐶",  # Dog Face
+    "🐱",  # Cat Face
+    "🐭",  # Mouse Face
+    "🐹",  # Hamster Face
+    "🐰",  # Rabbit Face
+    "🦊",  # Fox Face
+    "🐻",  # Bear Face
+    "🐼",  # Panda Face
+    "🐨",  # Koala
+    "🐯",  # Tiger Face
+    "🦁",  # Lion Face
+    "🐮",  # Cow Face
+    "🐷",  # Pig Face
+    "🐸",  # Frog Face
+    "🐒",  # Monkey
+    "🦍",  # Gorilla
+    "🐘",  # Elephant
+    "🦒",  # Giraffe Face
+    "🦓",  # Zebra
+    "🐎",  # Horse
+    "🦌",  # Deer
+    "🐠",  # Tropical Fish
+    "🐬",  # Dolphin
+    "🐳",  # Spouting Whale
+    "🦈",  # Shark
+    "🐙",  # Octopus
+    "🦀",  # Crab
+    "🐢",  # Turtle
+    "🐍",  # Snake
+    "🐊",  # Crocodile
+    "🦎",  # Lizard
+    "🦖",  # T-Rex
+    "🦕",  # Sauropod
+    "🦅",  # Eagle
+    "🦉",  # Owl
+    "🐦",  # Bird
+    "🐧",  # Penguin
+    "🦆",  # Duck
+    "🦢",  # Swan
+    "🦋",  # Butterfly
+    "🐝",  # Honeybee
+    "🐞",  # Lady Beetle
+    "🕷",  # Spider
+    "🦂",  # Scorpion
+    "🐜",  # Ant
+    "🐌",  # Snail
+    "🦗",  # Cricket
+    "🐺",  # Wolf Face
+    "🦔",  # Hedgehog
+    "🦦",  # Otter
+]

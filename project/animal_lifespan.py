@@ -3,6 +3,7 @@ import art
 import random
 import os
 
+# Create function to clear the screen 
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -56,9 +57,10 @@ def play_game():
     score = 0
     current_index = 0
     max_index = len(animal_indices) - 1
+    zoo = []
 
     while current_index < max_index:
-        clear_screen()
+        
         print(f"\nAnimal No.{current_index}")
         display_animal_info(current_index, animal_indices)
 
@@ -77,9 +79,13 @@ def play_game():
         
         if user_choice == correct_answer:
             score += 1
+            zoo.append(art.animal_icons[current_index])
             print("You got it!")            
-            print(f"Your score: {score}\n")
+            print(f"Your score: {score}")
+            print("".join(zoo))
             current_index += 1
+            input("\nPress Enter to continue! ")
+            clear_screen()
             
         else:
             print(f"Game over. Final score: {score}")
@@ -97,18 +103,17 @@ def main():
     input("Press Enter to start the game! ")
     clear_screen()
     while True:
-        
+
         play_game()
-        try:
-            play_again = input("\nPlay again? Press 'y' to continue or any other key to quit: ").lower()
-            if play_again != 'y':
-                clear_screen()
-                print(art.goodbye)
-                break
-            print("\n" * 5)
-        except KeyboardInterrupt:
-            print("\nGame interrupted. Exiting...")
+        play_again = input("\nPlay again? Press 'y' to continue or any other key to quit: ").lower()
+        if play_again != 'y':
+            clear_screen()
+            print(art.goodbye)
             break
+        else:
+            clear_screen()
+            
+
 
 if __name__ == "__main__":
     main()

@@ -1,6 +1,10 @@
 import game_data
 import art
 import random
+import os
+
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 # Constants
 VALID_CHOICES = {"longer", "shorter", "same"}
@@ -54,6 +58,7 @@ def play_game():
     max_index = len(animal_indices) - 1
 
     while current_index < max_index:
+        clear_screen()
         print(f"\nAnimal No.{current_index}")
         display_animal_info(current_index, animal_indices)
 
@@ -75,23 +80,29 @@ def play_game():
             print("You got it!")            
             print(f"Your score: {score}\n")
             current_index += 1
+            
         else:
-            print(f"Wrong answer! Game over. Final score: {score}")
+            print(f"Game over. Final score: {score}")
+            
             break
     else:
         print(f"Congratulations! You got all answers correct. Final score: {score}")
 
 def main():
+    clear_screen()
     """Main function to start and manage the game."""
     print(art.animal_lifespan_game)
     print("Welcome to the Animal Lifespan Game!")
     print("Guess which animal has the longer lifespan!\n")
-
+    input("Press Enter to start the game! ")
+    clear_screen()
     while True:
+        
         play_game()
         try:
             play_again = input("\nPlay again? Press 'y' to continue or any other key to quit: ").lower()
             if play_again != 'y':
+                clear_screen()
                 print(art.goodbye)
                 break
             print("\n" * 5)

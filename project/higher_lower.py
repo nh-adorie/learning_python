@@ -1,54 +1,103 @@
-# import necessary libraries
 import game_data
+import art
 import random
 
-# Choose random animal to compete
-def choose_animal():
-    num = random.randint(0,49)
-    print(f"\nName: {game_data.animal[num]['name']}")
-    print(f"Location: {game_data.animal[num]['location']}")
-    print(f"Characteristics: {game_data.animal[num]['characteristics']}")
-    longevity = game_data.animal[num]['longevity']
-    name = game_data.animal[num]['name']
-    return longevity, name
+# Constants
+VALID_CHOICES = {"longer", "shorter", "same"}
 
-# Compare longevity of 2 animal to get the answer
-def compare(longevity1,longevity2):
-    ans = ""
-    if longevity2 < longevity1:
-        return "shorter"
-    elif longevity2 > longevity1:
-        return "longer"
-    else:
+def display_animal_info(animal_index, animal_indices):
+    """Display information about an animal."""
+    try:
+        animal = game_data.animal[animal_indices[animal_index]]
+        print(f"Name: \033[1m\033[32m{animal['name']}\033[0m")
+        print(f"Location: {animal['location']}")
+        print(f"Characteristics: {animal['characteristics']}")
+    except (IndexError, KeyError) as e:
+        print(f"Error accessing animal data: {e}")
+        raise
+
+def compare_lifespans(animal_index, animal_indices):
+    """Compare lifespans of two animals."""
+    try:
+        current = game_data.animal[animal_indices[animal_index]]['longevity']
+        next_animal = game_data.animal[animal_indices[animal_index + 1]]['longevity']
+        if current > next_animal:
+            return "longer"
+        elif current < next_animal:
+            return "shorter"
         return "same"
+    except (IndexError, KeyError) as e:
+        print(f"Error comparing lifespans: {e}")
+        raise
 
-# Pick 2 animal to start the comparing game
-longevity1, name1 = choose_animal()
-longevity2, name2 = choose_animal()
-print(f"\nComparing {name2}'s longevity and {name1}'s longevity, what do you think? ")
+def get_user_choice(animal_indices, current_index, next_index):
+    """Prompt user to compare lifespans and validate input."""
+    prompt = f"\nDoes \033[1;32m{game_data.animal[animal_indices[current_index]]['name']}\033[0m live longer, shorter, or the same as \033[1;32m{game_data.animal[animal_indices[next_index]]['name']}\033[0m? "
+    while True:
+        choice = input(prompt).lower()
+        if choice in VALID_CHOICES:
+            return choice
+        print("Please enter 'longer', 'shorter', or 'same'.")
 
-# Let user choose which one live longer
-while True:
-    user_choice = input(f"Please choose 'longer', 'shorter', or 'same' ").lower()
-    if user_choice not in ["longer","shorter","same"]:
-        print("Please input valid choice! ")
+def play_game():
+    """Run the animal lifespan comparison game."""
+
+    # Create random list of animal indices
+    try:
+        animal_indices = random.sample(range(len(game_data.animal)), len(game_data.animal))
+    except ValueError as e:
+        print(f"Error generating animal list: {e}")
+        return
+
+    score = 0
+    current_index = 0
+    max_index = len(animal_indices) - 1
+
+    while current_index < max_index:
+        print(f"\nAnimal No.{current_index}")
+        display_animal_info(current_index, animal_indices)
+
+        print(f"\nAnimal No.{current_index + 1}")
+        display_animal_info(current_index + 1, animal_indices)
+
+        current_animal = game_data.animal[animal_indices[current_index]]
+        next_animal = game_data.animal[animal_indices[current_index + 1]]
+
+        user_choice = get_user_choice(animal_indices,current_index, current_index + 1)
+        correct_answer = compare_lifespans(current_index, animal_indices)
+
+        print(
+            f"\n{current_animal['name']} generally lives for {current_animal['longevity']} years, " 
+            f"while {next_animal['name']} generally lives for {next_animal['longevity']} years")
+        
+        if user_choice == correct_answer:
+            score += 1
+            print("You got it!")            
+            print(f"Your score: {score}\n")
+            current_index += 1
+        else:
+            print(f"Wrong answer! Game over. Final score: {score}")
+            break
     else:
-        break
+        print(f"Congratulations! You got all answers correct. Final score: {score}")
 
-# Compare user choice and the right answer
-answer = compare(longevity1,longevity2)
-if answer == user_choice:
-    print("You got it! Next! ")
-else:
-    print("Wrong answer! Game over! ")
-    print(f"{name1} lives for {longevity1} years.")
-    print(f"{name2} lives for {longevity2} years.")
-    print(f"{name2} lives {answer} to {name1}")
+def main():
+    """Main function to start and manage the game."""
+    print(art.animal_lifespan_game)
+    print("Welcome to the Animal Lifespan Game!")
+    print("Guess which animal has the longer lifespan!\n")
 
-# 
-# print(answer)
-    
+    while True:
+        play_game()
+        try:
+            play_again = input("\nPlay again? Press 'y' to continue or any other key to quit: ").lower()
+            if play_again != 'y':
+                print(art.goodbye)
+                break
+            print("\n" * 5)
+        except KeyboardInterrupt:
+            print("\nGame interrupted. Exiting...")
+            break
 
-
-
-    
+if __name__ == "__main__":
+    main()

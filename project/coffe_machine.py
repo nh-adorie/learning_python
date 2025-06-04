@@ -1,19 +1,32 @@
 import coffee_data
-
-# print our the menu
-# coffee_art = coffee_data.menu
-# print(coffee_art)
-
-#########
-menu = [coffee for coffee in coffee_data.ingredients]
+import os
 stock = coffee_data.stock
-master_recipe = coffee_data.ingredients
-ingredient = [item for item in stock]
-customer_choices = {} 
-revenue = 0
 
-# Create function to check valid number
+MENU = [coffee for coffee in coffee_data.ingredients]
+MASTER_RECIPE = coffee_data.ingredients
+INGREDIENT = [item for item in stock]
+PRICE = coffee_data.coffee_prices
+
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+def print_report():
+    """ Function to print report """
+    print(f"""
+- Total revenue: # revenue
+- Drinks order by customers: # type, quantity
+- Stock: # ingredient, quantity left
+""")
+
+def restock(stock):
+    """ Function to restock """
+    stock = coffee_data.stock
+    return stock
+
+# TODO2: choose drink --> check stock --> issue invoice --> payment --> serve --> update stock
+
 def valid_number(prompt):
+    """ Function to check if user input is valid """
     while True:
         try:
             while True:
@@ -24,107 +37,120 @@ def valid_number(prompt):
                     return number
         except ValueError:
             print("Please input valid number ")
-            
-# Create function to ask customer their choices
-def ask_for_customer_choice(prompt_type,promt_quantity):
-    while True:
-        choice = input(prompt_type)
-        if choice in menu:
-            quantity = valid_number(promt_quantity)     
-            return choice, quantity
-        elif choice.lower() == "no":
-            return None, None
-        
-        # To restock
-        elif choice.lower() == "restock":
-            restock()
-            return None, None
-        
-        # To print report
-        elif choice.lower() == "report":
-            print(f"""
-                Available ingredient: {stock}
-                Total revenue: {revenue}
-                Items order by customer: {customer_choices}
-                  """)
 
+def choose_drink(prompt_type,promt_quantity):
+    """ Function to let user choose drink """
+    while True:
+        drink = input(prompt_type)
+        if drink in MENU:
+            cup = valid_number(promt_quantity)
+            return drink, cup
+        elif drink.lower() == "no":
+            return None, None
+        elif drink.lower() == "close":
+            print("Close! See you tommorrow")
         else:
-            print("Sorry we do not serve that yet 😓 Please choose other drinks available in our menu ")
-        return ask_for_customer_choice(prompt_type,promt_quantity)
+            print("Sorry we do not serve that yet. Please choose other drinks available in our menu ")
+        return choose_drink(prompt_type,promt_quantity)
 
-# Create program to substract the ingredient used from stock // and restock when enter "restock"
-def stock_management(stock, used):
-    for item in ingredient:
-        stock[item] -= used[item]
+def summary_order():
+    """ Function to summary order that customer input """
+    customer_order = {}
+    drink, cup = choose_drink("\nHi, what do you want to order? ", "How many cup? ")
+    customer_order[drink] = cup
 
-def restock():
-    stock = {
-    "water": 5000,
-    "milk": 5000,
-    "sugar": 500, 
-    "coffee_beans": 500,
-    "cream": 500, 
-    }
-    return stock
-
-# Create function to check if there sufficiant ingredient for the drinks they choose
-
-def check_ingredient(customer_choices):
-    needed_ingredient = {
-    "water": 0,
-    "milk": 0,
-    "sugar": 0,
-    "coffee_beans": 0,
-    "cream": 0,
-}
-
-    for type in customer_choices:
-        recipe = master_recipe[type] 
-        for item in ingredient:
-            needed_ingredient[item] += recipe[item] * customer_choices[type]   
-
-    def is_sufficient(needed):
-        stock_management(stock, needed)
-        return all(stock[item] >= 0 for item in ingredient)
-
-    # If there is enough ingredient --> Confirm and continue
-    # If there is not enough ingredient --> Sorry
-
-    price = coffee_data.coffee_prices
-
-    if is_sufficient(needed_ingredient):
-        print("\nLet me confirm your order: ")
-        
-        for type in customer_choices:
-            revenue += customer_choices[type] * price[type]
-            if customer_choices[type] == 1:
-                print(f"{customer_choices[type]} cup of {type}")
-            else: 
-                print(f"{customer_choices[type]} cups of {type}")
-        print(f"Total: ${revenue}")
-    else:
-        print("Sorry there is not enough ingredient now. Do you want other drink? ")
-
-# The program
-
-
-def main():    
-    type, quantity = ask_for_customer_choice("What do you want to drink? ", "How many cups? ")
-    customer_choices[type] = quantity
     while True:
-        more_type, more_quantity = ask_for_customer_choice("\nDo you want anything else? ", "How many cups? ")
-        if more_type is None:
+        drink, cup = choose_drink("\nAnything else? ", "How many cup? ")
+        if drink == None:
             break
-        customer_choices[more_type] = more_quantity
-
-    check_ingredient(customer_choices)
-
-
-
-# Run the program
-if __name__ == "__main__":
-    main()
+        customer_order[drink] = cup
     
-print(stock)
+    return customer_order
+
+def check_stock(customer_order):
+    current_stock = stock
+    usage = {
+        "water": 0,
+        "milk": 0,
+        "sugar": 0,
+        "coffee_beans":0,
+        "cream": 0,
+    }
+    for drink in customer_order: #latte
+        recipe = MASTER_RECIPE[drink]
+        for item in INGREDIENT: # item: water, sugar, ...
+            usage[item] += recipe[item] * customer_order[drink]
     
+    new_stock = {}
+    for item in INGREDIENT:
+        new_stock[item] = (current_stock[item] - usage[item])
+    check = all(new_stock[item] > 0 for item in INGREDIENT) # True if there enough ingredient // False if not
+    return check, new_stock
+
+def issue_invoice(customer_order):
+    invoice = 0
+    print("\nLet me confirm your order: ")
+    for drink in customer_order:
+        invoice += customer_order[drink] * PRICE[drink]
+        if customer_order[drink] > 1:
+            print(f"{customer_order[drink]} cups of {drink}")
+        else:
+            print(f"{customer_order[drink]} cup of {drink}")
+        print(f"Total: ${invoice}")
+    return invoice
+
+def payment(invoice):
+    while True:
+        receive = valid_number("Please give me your money ")
+        if receive < invoice:
+            print("Not enough money ")
+        elif receive > invoice:
+            print(f"Here is your ${receive - invoice} and your coffee. Thank you ~ ")
+            clear_screen()
+            break
+        else:
+            print("Here is your coffee. Please enjoy~")
+            clear_screen()
+            break
+
+def process_customer():
+    customer_order = summary_order()
+    check, new_stock = check_stock(customer_order)
+    if check:
+        invoice = issue_invoice(customer_order)
+        payment(invoice)
+    else:
+        print("Sorry there is not enough ingredient ")
+    return new_stock
+
+
+# main
+print("Welcome coffee shop management")
+while True:
+    action = input("\nChoose 'report' to view report // 'restock' to restock // 'open' to open the shop ")
+    if action == "report":
+        print_report()
+    elif action == "restock":
+        restock()
+    elif action == "open":
+        clear_screen()
+        print(coffee_data.art)
+        process_customer()
+    else:
+        print("Please input valid value")
+
+
+
+
+
+
+
+    
+    
+
+
+
+
+
+
 

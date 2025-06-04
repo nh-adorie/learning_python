@@ -71,11 +71,11 @@ ingredients = {
     }
 }
 
-menu = """
+art = """
      ( (
        ) )
     ........
-    |      |] WELCOME TO OUR MAGIC COFFEE MACHINE 
+    |      |] WELCOME TO OUR MAGIC COFFEE SHOP 
     \      /         Enjoy your brew ☕
      `----'
 

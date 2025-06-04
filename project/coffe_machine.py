@@ -1,8 +1,13 @@
 import coffee_data
 import os
+
+global stock 
 stock = coffee_data.stock
 
-MENU = [coffee for coffee in coffee_data.ingredients]
+global revenue
+revenue = 0
+
+MENU = [coffee.lower() for coffee in coffee_data.ingredients]
 MASTER_RECIPE = coffee_data.ingredients
 INGREDIENT = [item for item in stock]
 PRICE = coffee_data.coffee_prices
@@ -10,16 +15,17 @@ PRICE = coffee_data.coffee_prices
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def print_report():
+def print_report(stock, revenue):
     """ Function to print report """
-    print(f"""
-- Total revenue: # revenue
-- Drinks order by customers: # type, quantity
-- Stock: # ingredient, quantity left
-""")
+    print(f"Stock status as below: ")
+    for item in stock:
+        print(f"{item} has {stock[item]}ml left.")
+    print(f"Total revenue: {revenue}")
 
-def restock(stock):
+
+def restock():
     """ Function to restock """
+    global stock
     stock = coffee_data.stock
     return stock
 
@@ -41,14 +47,12 @@ def valid_number(prompt):
 def choose_drink(prompt_type,promt_quantity):
     """ Function to let user choose drink """
     while True:
-        drink = input(prompt_type)
+        drink = input(prompt_type).lower()
         if drink in MENU:
             cup = valid_number(promt_quantity)
             return drink, cup
         elif drink.lower() == "no":
             return None, None
-        elif drink.lower() == "close":
-            print("Close! See you tommorrow")
         else:
             print("Sorry we do not serve that yet. Please choose other drinks available in our menu ")
         return choose_drink(prompt_type,promt_quantity)
@@ -68,6 +72,7 @@ def summary_order():
     return customer_order
 
 def check_stock(customer_order):
+    global stock
     current_stock = stock
     usage = {
         "water": 0,
@@ -88,6 +93,7 @@ def check_stock(customer_order):
     return check, new_stock
 
 def issue_invoice(customer_order):
+    global revenue
     invoice = 0
     print("\nLet me confirm your order: ")
     for drink in customer_order:
@@ -97,6 +103,7 @@ def issue_invoice(customer_order):
         else:
             print(f"{customer_order[drink]} cup of {drink}")
         print(f"Total: ${invoice}")
+        revenue += invoice
     return invoice
 
 def payment(invoice):
@@ -106,49 +113,55 @@ def payment(invoice):
             print("Not enough money ")
         elif receive > invoice:
             print(f"Here is your ${receive - invoice} and your coffee. Thank you ~ ")
-            clear_screen()
+            input("Please enter to continue")
             break
         else:
             print("Here is your coffee. Please enjoy~")
-            clear_screen()
+            input("Please enter to continue")          
             break
 
 def process_customer():
+    clear_screen()
+    print(coffee_data.art)
+    global stock
     customer_order = summary_order()
     check, new_stock = check_stock(customer_order)
     if check:
         invoice = issue_invoice(customer_order)
         payment(invoice)
+        stock = new_stock
     else:
         print("Sorry there is not enough ingredient ")
-    return new_stock
-
 
 # main
 print("Welcome coffee shop management")
+
 while True:
-    action = input("\nChoose 'report' to view report // 'restock' to restock // 'open' to open the shop ")
-    if action == "report":
-        print_report()
-    elif action == "restock":
-        restock()
-    elif action == "open":
-        clear_screen()
-        print(coffee_data.art)
-        process_customer()
-    else:
-        print("Please input valid value")
+    clear_screen()
+    action = ""
+    while action != "next":
+        prompt = """
+Please choose what to do:
+next    -- to welcome customer
+report  -- to show summary of customer orders and stock status
+restock -- to restock
+close   -- to close the shop
+"""
+        action = input(prompt).strip().lower()
+        
+        if action == "close":
+            print("Goodbye ~")
+            exit()
+        elif action == "report":
+            print_report(stock, revenue)
+        elif action == "restock":
+            restock()
+        elif action == "next":
+            break 
+        else:
+            print("Please input a valid option.")
 
-
-
-
-
-
-
-    
-    
-
-
+    process_customer()
 
 
 

@@ -41,21 +41,21 @@ ingredients = {
         "coffee_beans": 24,
         "cream": 20 # Assuming whipped cream falls under 'cream'
     },
-    "flat_white": {
+    "flatwhite": {
         "water": 180,
         "milk": 220,
         "sugar": 0,
         "coffee_beans": 22,
         "cream": 0
     },
-    "irish_coffee": {
+    "irish": {
         "water": 150,
         "milk": 0,
         "sugar": 15, # Brown sugar
         "coffee_beans": 20,
         "cream": 30
     },
-    "cold_brew": {
+    "coldbrew": {
         "water": 500,
         "milk": 0,
         "sugar": 0,

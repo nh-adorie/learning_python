@@ -87,9 +87,9 @@ art = """
 ║       Americano     ...............   $3.00    ║
 ║       Macchiato     ...............   $3.50    ║
 ║       Mocha         ...............   $4.50    ║
-║       Flat White    ...............   $4.25    ║
-║       Irish Coffee  ...............   $6.00    ║
-║       Cold Brew     ...............   $4.25    ║
+║       Flatwhite     ...............   $4.25    ║
+║       Irish         ...............   $6.00    ║
+║       Coldbrew      ...............   $4.25    ║
 ║       Frappuccino   ...............   $5.00    ║
 ║                                                ║
 ╚════════════════════════════════════════════════╝
@@ -102,9 +102,9 @@ coffee_prices = {
     "americano": 3.00,
     "macchiato": 3.50,
     "mocha": 4.50,
-    "flat_white": 4.25,
-    "irish_coffee": 6.00, 
-    "cold_brew": 4.25,
+    "flatwhite": 4.25,
+    "irish": 6.00, 
+    "coldbrew": 4.25,
     "frappuccino": 5.00,
 }
 

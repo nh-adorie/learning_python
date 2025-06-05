@@ -19,7 +19,7 @@ def print_report(stock, revenue):
     """ Function to print report """
     print(f"Stock status as below: ")
     for item in stock:
-        print(f"{item} has {stock[item]}ml left.")
+        print(f"⭐{item} has {stock[item]}ml left.")
     print(f"Total revenue: {revenue}")
 
 
@@ -60,11 +60,11 @@ def choose_drink(prompt_type,promt_quantity):
 def summary_order():
     """ Function to summary order that customer input """
     customer_order = {}
-    drink, cup = choose_drink("\nHi, what do you want to order? ", "How many cup? ")
+    drink, cup = choose_drink("\n🐱 What do you want to order? ", "How many cup? ")
     customer_order[drink] = cup
 
     while True:
-        drink, cup = choose_drink("\nAnything else? ", "How many cup? ")
+        drink, cup = choose_drink("\n🐱 Anything else? ", "How many cup? ")
         if drink == None:
             break
         customer_order[drink] = cup
@@ -99,25 +99,25 @@ def issue_invoice(customer_order):
     for drink in customer_order:
         invoice += customer_order[drink] * PRICE[drink]
         if customer_order[drink] > 1:
-            print(f"{customer_order[drink]} cups of {drink}")
+            print(f"✨{customer_order[drink]} cups of {drink}")
         else:
-            print(f"{customer_order[drink]} cup of {drink}")
-        print(f"Total: ${invoice}")
-        revenue += invoice
+            print(f"✨{customer_order[drink]} cup of {drink}")
+    print(f"💸Total: ${invoice}")
+    revenue += invoice
     return invoice
 
 def payment(invoice):
     while True:
-        receive = valid_number("Please give me your money ")
+        receive = valid_number("Please give me your money 💸 ")
         if receive < invoice:
             print("Not enough money ")
         elif receive > invoice:
-            print(f"Here is your ${receive - invoice} and your coffee. Thank you ~ ")
+            print(f"Here is your ${receive - invoice} and your coffee ☕ Thank you ~ ")
             input("Please enter to continue")
             break
         else:
-            print("Here is your coffee. Please enjoy~")
-            input("Please enter to continue")          
+            print("Here is your coffee ☕ Please enjoy~")
+            input("\nPlease enter to continue")          
             break
 
 def process_customer():
@@ -131,21 +131,20 @@ def process_customer():
         payment(invoice)
         stock = new_stock
     else:
-        print("Sorry there is not enough ingredient ")
+        print("Sorry there is not enough ingredient 😓 ")
 
 # main
-print("Welcome coffee shop management")
+print("☕ Welcome coffee shop management ☕")
 
 while True:
-    clear_screen()
     action = ""
     while action != "next":
         prompt = """
-Please choose what to do:
-next    -- to welcome customer
-report  -- to show summary of customer orders and stock status
-restock -- to restock
-close   -- to close the shop
+PLEASE CHOOSE WHAT TO DO:
+🟢 next    -- to welcome customer
+🔵 report  -- to show summary of customer orders and stock status
+🟠 restock -- to restock
+🔴 close   -- to close the shop
 """
         action = input(prompt).strip().lower()
         

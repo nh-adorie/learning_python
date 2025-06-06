@@ -17,10 +17,10 @@ def clear_screen():
 
 def print_report(stock, revenue):
     """ Function to print report """
-    print(f"Stock status as below: ")
+    print(f"\n📒  Stock status as below: ")
     for item in stock:
-        print(f"⭐{item} has {stock[item]}ml left.")
-    print(f"Total revenue: {revenue}")
+        print(f"● {item} has {stock[item]}ml left.")
+    print(f"\n💰  Total revenue: {revenue}")
 
 
 def restock():

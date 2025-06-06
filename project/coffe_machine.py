@@ -162,7 +162,12 @@ PLEASE CHOOSE WHAT TO DO:
 
     process_customer()
 
-
+# Walkthrough notes:
+#
+# Alt shift --> more cursors
+# 
+# total = int(input("How many 5k? "))
+# total += int(input("How many 10k? "))
 
 
 

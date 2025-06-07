@@ -11,35 +11,41 @@
 # Constructing Object
 
 # turtle: module // Turtle, Screen: class
-# from turtle import Turtle, Screen
+from turtle import Turtle, Screen
 
-# # my_turtle: object 
-# my_turtle = Turtle()
-# my_screen = Screen()
+# my_turtle: object 
+my_turtle = Turtle()
+my_screen = Screen()
 
 # https://docs.python.org/3/library/turtle.html
-# my_screen.canvheight
-# my_screen.exitonclick()
-# my_turtle.shape("turtle")
-# my_turtle.color("pink")
+my_screen.canvheight
+my_screen.exitonclick()
+my_turtle.shape("turtle")
+my_turtle.color("pink")
 
 # Python Packages: https://pypi.org/
 # 
 import cat_fact
 import cat_fact.cli
 
-import cat_fact.cli
+fact = cat_fact.cli.cat_client.get_random_fact("cat")
+print(fact)
 
-# Sử dụng instance cat_client đã có sẵn từ module cli
-# và gọi phương thức để lấy fact (ví dụ: .get_fact(), .fact(), .get_random_fact())
-# Chúng ta cần tìm tên phương thức chính xác trong CatClient
-# Thử gọi dir() trên cat_fact.cli.cat_client để xem các phương thức của nó
 
-# Bước tạm thời để tìm phương thức đúng (sẽ làm trong terminal)
-fact = cat_fact.cli.cat_client.get_fact() # Rất có thể tên hàm là này
-fact = cat_fact.cli.cat_client.fact()
-fact = cat_fact.cli.cat_client.random_fact()
+from prettytable import PrettyTable
+# PrettyTable is a class
 
+table = PrettyTable()
+# table is a object from the class PrettyTable
+
+table.add_column("Pokemon Name",["Pikachu","Clefairy","Diglett","Meowth","Dewgong"])
+table.add_column("Type",["Electric","Fairy","Ground","Normal","Water-Ice"])
+
+print(table.align)
+
+table.align = "l"
+
+print(table)
 
 
 

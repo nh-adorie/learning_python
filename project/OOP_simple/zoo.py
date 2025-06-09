@@ -6,7 +6,7 @@ class Animal:
     
     def __str__(self):
         """ to display information about a specific animal """
-        return (f"Name: {self.name.capitalize()}\nHabitat: {self.habitat.capitalize()}\nQuantity: {self.quantity}")
+        return (f"Name: {self.name.capitalize()}\nHabitat: {self.habitat.capitalize()}\nQuantity: {self.quantity}\n---")
     
     def update_quantity(self,updated_quantity):
         """ to update animal quantity """
@@ -61,7 +61,85 @@ class Zoo:
             print(animal)
             print("---")
         print("=============================")
+    
+class ZooManagement:
+    def __init__(self,zoo):
+        self.zoo = zoo  
 
+    def manage_zoo(self,zoo):
+        print("Welcome to Zoo Management! ")
+        print("""
+1. Display all animals
+2. Find animal by name
+3. Find animal by habitat
+4. Add new animal
+5. Update animal quantity
+6. Exit
+""")
+        while True:
+            choice = input("Please choose 1-6: ")
+            if choice not in ["1","2","3","4","5","6"]:
+                print("\nPlease input 1-6 ")
+
+            # Display all animal
+            elif choice == "1":
+                print("Display all animal")
+                zoo.display_list(zoo.animal_list)
+
+            # Find animal by name
+            elif choice == "2":
+                print("\nFind animal by name: Please enter animal name to find out its information. Type 'quit' back to main menu ")
+                while True:
+                    animal_name = input("\nAnimal name: ")
+                    if animal_name == "quit":
+                        break
+                    elif zoo.find_animal_by_name(animal_name) != None:
+                        print(f"{animal_name.capitalize()} found! Information as below: \n{zoo.find_animal_by_name(animal_name)}")
+                    else:
+                        print(f"{animal_name.capitalize()} not found! ")
+            
+            # Find animal by habitat
+            elif choice == "3":
+                print("\nFind animals by habitat: Please enter animal's habitat. Type 'quit' to end ")
+                while True:
+                    input_habitat = input("\nAnimal habitat: ")
+                    result = zoo.find_animal_by_habitat(input_habitat)
+                    if input_habitat not in ["land", "water","air","quit"]:
+                        print("Please input valid habitat ")
+                    elif input_habitat == "quit":
+                        break
+                    else:
+                        print(f"Animals live in {input_habitat} includes: ")
+                        for animal in result:
+                            print(str(animal))
+                            print("---")
+                            print(f"Total animals live in {input_habitat}: {zoo.total_animal_by_habitat(result)}")
+
+            # Add new animal
+            elif choice == "4":
+                print("Add new animal ")
+                new_name = input("Name: ")
+                new_habitat = input("Habitat: ")
+                new_quantity = int(input("Quantity: "))
+                zoo.add_animal(Animal(new_name, new_habitat, new_quantity))
+                print("Added.")
+            
+            # Update animal
+            elif choice == "5":
+                print("Update animal quantity ")
+                update_name = input("Animal to update: ")
+                update_animal = zoo.find_animal_by_name(update_name)
+                if update_animal:
+                    update_quantity = int(input("New quantity: "))
+                    update_animal.update_quantity(update_quantity)
+                    print("Updated.")
+                else:
+                    print("Not found.")
+            
+            # Exit
+            else:
+                print("Goodbye ~ ")
+                break
 
 raw_data = [
     {"name": "lion", "habitat": "land", "quantity": 2},
@@ -81,40 +159,6 @@ for animal_dict in raw_data:
     animal_obj = Animal(animal_dict["name"],animal_dict["habitat"],animal_dict["quantity"])
     zoo_obj.add_animal(animal_obj)
 
-# Find by name
-print("Find animal by name: Please enter animal name to find out its information. Type 'quit' to end ")
-while True:
-    animal_name = input("Animal name: ")
-    if animal_name == "quit":
-        print("Goodbye ~ ")
-        break
-    elif zoo_obj.find_animal_by_name(animal_name) != None:
-        print(f"{animal_name.capitalize()} found! Information as below: \n{zoo_obj.find_animal_by_name(animal_name)}")
-    else:
-        print(f"{animal_name.capitalize()} not found! ")
+zoo_app = ZooManagement(zoo_obj)
+zoo_app.manage_zoo(zoo_obj)
 
-# Find by habitat:
-print("Find animals by habitat: Please enter animal's habitat. Type 'quit' to end ")
-while True:
-    input_habitat = input("\nAnimal habitat: ")
-    result = zoo_obj.find_animal_by_habitat(input_habitat)
-    if input_habitat not in ["land", "water","air","quit"]:
-        print("Please input valid habitat ")
-    elif input_habitat == "quit":
-        print("Goodbye ~")
-        break
-    else:
-        print(f"Animals live in {input_habitat} includes: ")
-        for animal in result:
-            print(str(animal))
-            print("---")
-            print(f"Total animals live in {input_habitat}: {zoo_obj.total_animal_by_habitat(result)}")
-
-# Add new animal:
-new_animal = Animal("elephant","land",5)
-zoo_obj.add_animal(new_animal)
-
-# Update new quantity:
-zoo_obj.update_quantity_by_name("tiger",7)
-
-zoo_obj.display_status()

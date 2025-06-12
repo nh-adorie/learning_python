@@ -1,4 +1,6 @@
-from book_store import Book, BookStore, Orders, Customer, Management
+from book_store import BookStore
+from app import Management
+from book import Book
 from raw_data import books_data
 
 # Lấy dữ liệu sách từ raw data
@@ -12,11 +14,3 @@ store.display_book_list()
 
 management_app = Management(store)
 management_app.main_menu()
-
-
-
-
-
-
-
-

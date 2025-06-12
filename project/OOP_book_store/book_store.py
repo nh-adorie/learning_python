@@ -8,7 +8,7 @@ class BookStore:
     
     def display_book_list(self):
         for book in self.book_list:
-            print(f"{book.title}: {book.quantity}")
+            print(f"-  {book.title}: {book.quantity}")
 
     def find_book_by_title(self, title):
         for book in self.book_list:

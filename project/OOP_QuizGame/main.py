@@ -18,5 +18,5 @@ print(f"Your final score: {game.score}/{game.quiz_number}")
 
 
 
-
+ 
    

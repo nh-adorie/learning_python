@@ -25,7 +25,3 @@ class Game:
             print(f"You got it right!\nYour score: {self.score}/{self.quiz_number} ")    
         else:
             print(f"That's wrong\nYour score: {self.score}/{self.quiz_number} ")
-
-
-
-  

@@ -30,4 +30,3 @@ open_api = {"response_code": 0,
          {"type": "boolean", "difficulty": "easy", "category": "Animals", "question": "The freshwater amphibian, the Axolotl, can regrow it&#039;s limbs.", "correct_answer": "True", "incorrect_answers": ["False"]}
          ]
          }
-

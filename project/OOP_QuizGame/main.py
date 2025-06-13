@@ -15,8 +15,3 @@ while game.still_has_quiz():
 
 print("You've completed the quiz")
 print(f"Your final score: {game.score}/{game.quiz_number}")
-
-
-
- 
-   

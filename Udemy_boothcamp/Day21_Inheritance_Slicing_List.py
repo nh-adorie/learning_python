@@ -20,4 +20,16 @@ class Fish(Animal):
 nemo = Fish()
 nemo.swim()
 nemo.breathe()
-        
+
+#slicing work with list and tuple
+
+# list  
+piano_keys = ["a", "b", "c", "d", "e", "f", "g"]
+print(f"C is: {piano_keys[2:5]}")
+print(piano_keys[::-1])
+
+# tuple
+piano_tuple = ("do", "re", "mi", "fa", "so", "la", "ti")
+print(piano_tuple[2:5])
+
+

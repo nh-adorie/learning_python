@@ -8,22 +8,9 @@
 
 # seek(0) sẽ đưa con trỏ chuột về đầu file
 
-
-# with open("./my_file.txt", mode = "a+") as file:
-#     file.seek(0)
-#     content = file.read()
-#     file.write("\nNew text.")
-#     print(content)
-
-# with open("./new_file.txt", mode = "w+") as new_file:
-#     new_file.write("New file from scratch! ")
-#     new_file.seek(0)
-#     print(new_file.read())
-
 # Absolute File Path
 # Relative File Path ./ và ../
 # Working Directory
-
 
 import os
 

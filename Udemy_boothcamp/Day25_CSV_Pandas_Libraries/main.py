@@ -61,5 +61,8 @@ current_path = os.path.dirname(os.path.abspath(__file__))
 
 squirrel_path = os.path.join(current_path, "squirrel.csv")
 raw = pandas.read_csv(squirrel_path)
-raw = raw[raw["Primary Fur Color"].dropna()]
+count = raw["Primary Fur Color"].value_counts()
+new_file = pandas.DataFrame(count)
+new_file_path = os.path.join(current_path, "squirrel_count.csv")
+new_file.to_csv(new_file_path)
 

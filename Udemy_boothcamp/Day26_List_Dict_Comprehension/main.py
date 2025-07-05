@@ -11,6 +11,7 @@ for number in numbers:
 new_nums = [num + 1 for num in numbers]
 
 # bring out the same result!
+
 print(f"Using loop: {new_numbers} ")
 print(f"Using list comprehension: {new_nums}")
 
@@ -28,3 +29,4 @@ upper_names = [name.upper() for name in names if name[-1] == "e"]
 print(f"Short names: {short_names}")
 print(f"Names started with letter A: {names_started_with_a}")
 print(f"Uppercase names ended with letter E: {upper_names}")
+

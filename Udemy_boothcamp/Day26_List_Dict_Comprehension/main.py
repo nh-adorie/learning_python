@@ -30,3 +30,6 @@ print(f"Short names: {short_names}")
 print(f"Names started with letter A: {names_started_with_a}")
 print(f"Uppercase names ended with letter E: {upper_names}")
 
+
+# dictionary comprehension
+

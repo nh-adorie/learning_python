@@ -31,6 +31,7 @@ print(f"Names started with letter A: {names_started_with_a}")
 print(f"Uppercase names ended with letter E: {upper_names}")
 
 
+
 # dictionary comprehension
 
 # new_dict = {new_key: new_value for item in list}

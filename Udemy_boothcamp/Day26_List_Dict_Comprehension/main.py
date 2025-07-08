@@ -33,3 +33,46 @@ print(f"Uppercase names ended with letter E: {upper_names}")
 
 # dictionary comprehension
 
+# new_dict = {new_key: new_value for item in list}
+# new_dict = {new_key: new_value for (key: value) in dict.items()}
+# new_dict = {new_key: new_value for (key: value) in dict.items() for test}
+
+import random
+student_scores = {student: random.randint(1,100) for student in names}
+print(f"Student score: {student_scores}")
+
+passed_students = {student: student_scores[student] for student in student_scores if student_scores[student] > 60}
+print(f"Passed Students: {passed_students}")
+
+# Viết cách này thì ngắn gọn hơn
+failed_students = {student: score for (student, score) in student_scores.items() if score < 60}
+print(f"Failed Students: {failed_students}")
+
+
+
+# How to iterate over a Pandas Dataframe
+print("\n"*10)
+student_dict = {
+    "student": ["adorie", "foxie", "kitty"],
+    "score": [27, 99, 58]
+    }
+
+# looping through dict
+for (key, value) in student_dict.items():
+    print(key)
+
+
+import pandas
+student_df = pandas.DataFrame(student_dict)
+
+# looping throught dataframe
+for (key, value) in student_df.items():
+    print(value)
+
+# looping throught each ROW in dataframe
+for (index, row) in student_df.iterrows():
+    # print(row) # dtype: object
+    # print(row.score)
+    if row.score > 50:
+        print(row.student)
+
